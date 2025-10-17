@@ -1,68 +1,69 @@
 import React, { use } from 'react';
-// import { AuthContext } from '../../contexts/AuthContext';
-// import Swal from 'sweetalert2';
+
+import Swal from 'sweetalert2';
 
 import Lottie from 'lottie-react';
 import lottiefile1 from '../../assets/lottiefiles/register.json'
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Register = () => {
 
-    // const handleSignUp = (e) => {
-    //     e.preventDefault();
-    //     const form = e.target;
-    //     const formData = new FormData(form);
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
 
-    //     //method 1 for email & passwor
-    //     // const email = formData.get('email');
-    //     // const password = formData.get('password');
+        //method 1 for email & passwor
+        // const email = formData.get('email');
+        // const password = formData.get('password');
 
-    //     //mehtod 2 for get email,password & all input data using fromEmtries
-    //     const { email, password, ...restFormData } = Object.fromEntries(formData.entries());
+        //mehtod 2 for get email,password & all input data using fromEmtries
+        const { email, password, ...restFormData } = Object.fromEntries(formData.entries());
 
-    //     //console.log(email, password,restFormData);
+        //console.log(email, password,restFormData);
 
 
-    //     //create user in the firebase
-    //     createUser(email, password)
-    //         .then(result => {
-    //             console.log(result.user)
+        //create user in the firebase
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user)
 
-    //             const userProfile = {
-    //                 email, 
-    //                 ...restFormData,
-    //                 creationTime: result.user?.metadata?.creationTime,
-    //                 lastSignInTime: result.user?.metadata?.lastSignInTime
-    //             }
+                // const userProfile = {
+                //     email, 
+                //     ...restFormData,
+                //     creationTime: result.user?.metadata?.creationTime,
+                //     lastSignInTime: result.user?.metadata?.lastSignInTime
+                // }
 
-    //             // save profile info in the db
-    //             fetch('http://localhost:3000/users', {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     'content-type': 'application/json'
-    //                 },
-    //                 body: JSON.stringify(userProfile)
-    //             })
-    //                 .then(res => res.json())
-    //                 .then(data => {
-    //                     if (data.insertedId) {
-    //                         Swal.fire({
-    //                             position: "top-end",
-    //                             icon: "success",
-    //                             title: "Your account is created.",
-    //                             showConfirmButton: false,
-    //                             timer: 1500
-    //                         });
-    //                     }
-    //                 })
-    //         })
-    //         .then(error => {
-    //             console.log(error)
-    //         })
+                // // save profile info in the db
+                // fetch('http://localhost:3000/users', {
+                //     method: 'POST',
+                //     headers: {
+                //         'content-type': 'application/json'
+                //     },
+                //     body: JSON.stringify(userProfile)
+                // })
+                //     .then(res => res.json())
+                //     .then(data => {
+                //         if (data.insertedId) {
+                //             Swal.fire({
+                //                 position: "top-end",
+                //                 icon: "success",
+                //                 title: "Your account is created.",
+                //                 showConfirmButton: false,
+                //                 timer: 1500
+                //             });
+                //         }
+                //     })
+            })
+            .then(error => {
+                console.log(error)
+            })
 
-    // }
+    }
 
-    // const { createUser } = use(AuthContext);
-    // console.log(createUser);
+    const { createUser } = use(AuthContext);
+    console.log(createUser);
 
 
     return (
@@ -70,7 +71,7 @@ const Register = () => {
             <div className="card-body">
                 <h1 className="text-5xl font-bold">Sign Up now!</h1>
 
-                <form className="fieldset ">
+                <form className="fieldset " onSubmit={handleSignUp}>
                     <label className="label">Name</label>
                     <input type="text" name="name" className="input" placeholder="Name" />
                     <label className="label">Address</label>
