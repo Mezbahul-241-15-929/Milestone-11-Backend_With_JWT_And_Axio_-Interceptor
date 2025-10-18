@@ -2,30 +2,30 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import lottiefile1 from '../../assets/lottiefiles/register.json';
 import Lottie from 'lottie-react';
+import SocialLogin from '../Login/SocialLogin';
 
 const Register = () => {
 
     const { createUser } = useContext(AuthContext);
     console.log(createUser);
 
-    const handleSignUp = (e) => {
+    const handleRegister = e => {
         e.preventDefault();
         const form = e.target;
-        const formData = new FormData(form);
-
-        const email = formData.get('email');
-        const password = formData.get('password');
-
+        const email = form.email.value;
+        const password = form.password.value;
         console.log(email, password);
 
-        // Create user in Firebase
+        // password validation: 
+        // show password validation error
         createUser(email, password)
             .then(result => {
-                console.log(result.user);
+                console.log(result.user)
             })
             .catch(error => {
-                console.log(error);
-            });
+                console.log(error.message)
+            })
+
     }
 
     return (
@@ -33,7 +33,7 @@ const Register = () => {
             <div className="card-body">
                 <h1 className="text-5xl font-bold">Sign Up now!</h1>
 
-                <form onSubmit={handleSignUp} className="fieldset">
+                <form onSubmit={handleRegister} className="fieldset">
                     <label className="label">Email</label>
                     <input name='email' type="email" className="input" placeholder="Email" />
                     <label className="label">Password</label>
@@ -41,6 +41,7 @@ const Register = () => {
                     <div><a className="link link-hover">Forgot password?</a></div>
                     <button className="btn btn-neutral mt-4">Signup</button>
                 </form>
+                <SocialLogin></SocialLogin>
             </div>
             <div>
                 <Lottie style={{ width: '400px' }} animationData={lottiefile1} loop={true} />
