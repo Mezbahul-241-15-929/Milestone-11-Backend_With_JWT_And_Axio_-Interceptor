@@ -15,6 +15,7 @@ import AuthProvider from './contexts/AuthProvider.jsx';
 import JobDetails from './Components/Jobs/JobDetails.jsx';
 import PrivateRoute from './Router/PrivateRoute.jsx';
 import JobApply from './Components/Jobs/JobApply.jsx';
+import Myapplications from './Components/Jobs/Myapplications.jsx';
 
 
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         {
           path: 'jobApply/:id',
           element: <PrivateRoute><JobApply></JobApply></PrivateRoute>
+        },
+        {
+          path: '/myApplications',
+          element: <PrivateRoute><Myapplications></Myapplications></PrivateRoute>
         }
     ],
   },
