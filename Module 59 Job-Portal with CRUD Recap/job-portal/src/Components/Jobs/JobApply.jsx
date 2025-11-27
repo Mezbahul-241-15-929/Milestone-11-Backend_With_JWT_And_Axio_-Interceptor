@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link, useParams } from 'react-router';
 import useAuth from '../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const JobApply = () => {
     //const param = useParams();
-    const {id: jobId} = useParams();
-    console.log(jobId );
+    const {id} = useParams();
+    //console.log(jobId );
 
     const {user} = useAuth();
     console.log(user);
@@ -19,34 +20,34 @@ const JobApply = () => {
 
         console.log(linkedIn, github, resume);
 
-        // const jobApplication = {
-        //     job_id: id,
-        //     applicant_email: user.email,
-        //     linkedIn,
-        //     github,
-        //     resume
-        // }
+        const jobApplication = {
+            job_id: id,
+            applicant_email: user.email,
+            linkedIn,
+            github,
+            resume
+        }
 
-        // fetch('http://localhost:5000/job-applications', {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(jobApplication)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.insertedId) {
-        //             Swal.fire({
-        //                 position: "top-end",
-        //                 icon: "success",
-        //                 title: "Your work has been saved",
-        //                 showConfirmButton: false,
-        //                 timer: 1500
-        //             });
-        //             navigate('/myApplications')
-        //         }
-        //     })
+        fetch('http://localhost:3000/applications', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(jobApplication)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your work has been saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    //navigate('/myApplications')
+                }
+            })
 
     }
 
@@ -72,7 +73,7 @@ const JobApply = () => {
                     </label>
                     <input type="url" name='resume' placeholder="Resume URL" className="input input-bordered" required />
                 </div>
-                <Link to={`/jobs/${jobId}`}><h1 className='text-3xl'>Job Details</h1></Link>
+                <Link to={`/jobs/${id}`}><h1 className='text-3xl'>Job Details</h1></Link>
                 <div className="form-control mt-6">
                     <button className="btn btn-primary">Apply</button>
                 </div>
