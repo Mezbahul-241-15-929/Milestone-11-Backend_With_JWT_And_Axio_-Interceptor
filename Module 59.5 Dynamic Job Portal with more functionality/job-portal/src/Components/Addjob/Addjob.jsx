@@ -1,7 +1,10 @@
 import React from 'react';
 import { Form } from 'react-router';
+import useAuth from '../../hooks/useAuth';
 
 const Addjob = () => {
+
+    const { user } = useAuth();
 
 
     const handleAddJob = e => {
@@ -9,7 +12,31 @@ const Addjob = () => {
         const form = e.target;
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-        console.log(data);
+        //console.log(data);
+
+        //salary range
+        const { min, max, currency, ...newJob } = data;
+        //console.log(newJob);
+
+        newJob.salaryRange = { min, max, currency };
+        //console.log(newJob);
+
+        //process requirements
+        const reqString = newJob.requirements;
+        //console.log(reqString); //html, css, javascript
+        const reqD = reqString.split(',')
+        //console.log(reqD); //['html', ' css', ' javascript']
+        const reqC = reqD.map(req => req.trim()); //['html', 'css', 'javascript']
+        newJob.requirements = reqC;
+
+
+        //responsibilities
+        newJob.responsibilities = newJob.responsibilities.split(',').map(res => res.trim());
+        console.log(newJob)
+
+
+
+
     }
 
 
@@ -43,9 +70,9 @@ const Addjob = () => {
 
                     <div className="filter">
                         <input className="btn filter-reset" type="radio" name="jobType" aria-label="All" />
-                        <input className="btn" type="radio" name="jobType" aria-label="On-Site" />
-                        <input className="btn" type="radio" name="jobType" aria-label="Remote" />
-                        <input className="btn" type="radio" name="jobType" aria-label="Hybrid" />
+                        <input className="btn" type="radio" name="jobType" aria-label="On-Site" value="On-Site" />
+                        <input className="btn" type="radio" name="jobType" aria-label="Remote" value="Remote" />
+                        <input className="btn" type="radio" name="jobType" aria-label="Hybrid" value="Hybrid" />
                     </div>
 
 
@@ -126,7 +153,7 @@ const Addjob = () => {
                     <input name='hr_name' type="text" className="input" placeholder="HR Name" />
 
                     <label className="label">HR Email</label>
-                    <input name='hr_email' type="email" className="input" placeholder="HR Email" />
+                    <input name='hr_email' defaultValue={user.email} type="email" className="input" placeholder="HR Email" />
 
                 </fieldset>
 
