@@ -1,96 +1,138 @@
 import React from 'react';
+import { Form } from 'react-router';
 
 const Addjob = () => {
+
+
+    const handleAddJob = e => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        console.log(data);
+    }
+
+
     return (
-        <div>
-            <h2>Add job</h2>
+        <div className='flex flex-col justify-center items-center mt-5'>
+            <h2>ADD JOBS FROM</h2>
 
-            {/* Page details */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <legend className="fieldset-legend">Page details</legend>
+            <Form onSubmit={handleAddJob}>
 
-                <label className="label">Title</label>
-                <input name='title' type="text" className="input" placeholder="Job Title" />
+                {/* Page details */}
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <legend className="fieldset-legend">Page details</legend>
 
-                <label className="label">Company</label>
-                <input name='compnay' type="text" className="input" placeholder="Company name" />
+                    <label className="label">Title</label>
+                    <input name='title' type="text" className="input" placeholder="Job Title" />
 
-                <label className="label">Location</label>
-                <input name='location' type="text" className="input" placeholder="Company Location" />
+                    <label className="label">Company</label>
+                    <input name='compnay' type="text" className="input" placeholder="Company name" />
 
-                <label className="label">Company logo</label>
-                <input name='company_logo' type="text" className="input" placeholder="Company logo URL" />
+                    <label className="label">Location</label>
+                    <input name='location' type="text" className="input" placeholder="Company Location" />
 
-            </fieldset>
+                    <label className="label">Company logo</label>
+                    <input name='company_logo' type="text" className="input" placeholder="Company logo URL" />
 
-            {/* Job Type */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <legend className="fieldset-legend">Job Type</legend>
+                </fieldset>
 
-                <div className="filter">
-                    <input className="btn filter-reset" type="radio" name="jobType" aria-label="All" />
-                    <input className="btn" type="radio" name="jobType" aria-label="On-Site" />
-                    <input className="btn" type="radio" name="jobType" aria-label="Remote" />
-                    <input className="btn" type="radio" name="jobType" aria-label="Hybrid" />
-                </div>
+                {/* Job Type */}
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <legend className="fieldset-legend">Job Type</legend>
 
-
-            </fieldset>
-
-            {/* Job Category */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <legend className="fieldset-legend">Job Category</legend>
-
-                <select name='category' defaultValue="Pick a color" className="select">
-                    <option disabled={true}>Job Category</option>
-                    <option>Engineering</option>
-                    <option>Marketing</option>
-                    <option>Finance</option>
-                </select>
+                    <div className="filter">
+                        <input className="btn filter-reset" type="radio" name="jobType" aria-label="All" />
+                        <input className="btn" type="radio" name="jobType" aria-label="On-Site" />
+                        <input className="btn" type="radio" name="jobType" aria-label="Remote" />
+                        <input className="btn" type="radio" name="jobType" aria-label="Hybrid" />
+                    </div>
 
 
-            </fieldset>
+                </fieldset>
 
-            {/* Application Deadline */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <legend className="fieldset-legend">Application Deadline</legend>
+                {/* Job Category */}
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <legend className="fieldset-legend">Job Category</legend>
 
-                <input type="date" className="input" />
-
-
-            </fieldset>
-
-            {/* Salary Range */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <legend className="fieldset-legend">Salary Range</legend>
-
-                <label className="label">Minimum Salary</label>
-                <input name='salaryMin' type="text" className="input" placeholder="Minimum Salary" />
-
-                <label className="label">Maximum Salary</label>
-                <input name='salaryMax' type="text" className="input" placeholder="Maximum Salary" />
-
-                <label className="label">Currency</label>
-                <select name='category' defaultValue="Select a Currency" className="select">
-                    <option disabled={true}>Select a Currency</option>
-                    <option>BDT</option>
-                    <option>USC</option>
-                    <option>EU</option>
-                </select>
-
-            </fieldset>
-
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <legend className="fieldset-legend">Application Deadline</legend>
+                    <select name='category' defaultValue="Pick a color" className="select">
+                        <option disabled={true}>Job Category</option>
+                        <option>Engineering</option>
+                        <option>Marketing</option>
+                        <option>Finance</option>
+                    </select>
 
 
-            </fieldset>
+                </fieldset>
 
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <legend className="fieldset-legend">Application Deadline</legend>
+                {/* Application Deadline */}
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <legend className="fieldset-legend">Application Deadline</legend>
+
+                    <input type="date" className="input" />
 
 
-            </fieldset>
+                </fieldset>
+
+                {/* Salary Range */}
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <legend className="fieldset-legend">Salary Range</legend>
+
+                    <label className="label">Minimum Salary</label>
+                    <input name='min' type="text" className="input" placeholder="Minimum Salary" />
+
+                    <label className="label">Maximum Salary</label>
+                    <input name='max' type="text" className="input" placeholder="Maximum Salary" />
+
+                    <label className="label">Currency</label>
+                    <select name='currency' defaultValue="Select a Currency" className="select">
+                        <option disabled={true}>Select a Currency</option>
+                        <option>BDT</option>
+                        <option>USC</option>
+                        <option>EU</option>
+                    </select>
+
+                </fieldset>
+
+                {/* Job Description */}
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <legend className="fieldset-legend">Job Description</legend>
+
+                    <textarea name='description' className="textarea" placeholder="Description"></textarea>
+                </fieldset>
+
+                {/* Job Requirement */}
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <legend className="fieldset-legend">Job Requirement</legend>
+
+                    <textarea name='requirements' className="textarea" placeholder="Requirements (separate by comma)"></textarea>
+
+                </fieldset>
+
+
+                {/* Job Responsibilities */}
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <legend className="fieldset-legend">Job Responsibilities</legend>
+
+                    <textarea name='responsibilities' className="textarea" placeholder="Responsibilities (separate by comma)"></textarea>
+
+                </fieldset>
+
+                {/* HR related Info */}
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <legend className="fieldset-legend">HR related Info</legend>
+
+                    <label className="label">HR Name</label>
+                    <input name='hr_name' type="text" className="input" placeholder="HR Name" />
+
+                    <label className="label">HR Email</label>
+                    <input name='hr_email' type="email" className="input" placeholder="HR Email" />
+
+                </fieldset>
+
+                <input type="submit" name="" id="" className='btn' value="Add Job" />
+
+            </Form>
 
         </div>
     );
