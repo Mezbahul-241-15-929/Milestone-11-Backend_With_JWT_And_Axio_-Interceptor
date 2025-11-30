@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form } from 'react-router';
 import useAuth from '../../hooks/useAuth';
+import axios, { Axios } from 'axios';
+import Swal from 'sweetalert2';
 
 const Addjob = () => {
 
@@ -33,6 +35,32 @@ const Addjob = () => {
         //responsibilities
         newJob.responsibilities = newJob.responsibilities.split(',').map(res => res.trim());
         console.log(newJob)
+
+
+        newJob.status = 'active'
+        console.log(Object.keys(newJob).length); //14
+
+
+        //save job to the database
+        axios.post('http://localhost:3000/jobs', newJob)
+            .then(res => {
+                console.log(res);
+                if (res.data.insertedId) {
+
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your job has been saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+
 
 
 
@@ -96,7 +124,7 @@ const Addjob = () => {
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
                     <legend className="fieldset-legend">Application Deadline</legend>
 
-                    <input type="date" className="input" />
+                    <input name='deadline' type="date" className="input" />
 
 
                 </fieldset>
