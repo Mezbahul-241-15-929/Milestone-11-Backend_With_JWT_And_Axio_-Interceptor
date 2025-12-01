@@ -15,6 +15,7 @@ const MyPostedJobsList = ({ jobsCreatedByPromise }) => {
                             <th>No</th>
                             <th>Job Title</th>
                             <th>Deadline</th>
+                            <th>Application Count</th>
                             <th>View Applications</th>
                         </tr>
                     </thead>
@@ -25,6 +26,7 @@ const MyPostedJobsList = ({ jobsCreatedByPromise }) => {
                                 <th>{index + 1}</th>
                                 <td>{job.title}</td>
                                 <td>{job.deadline}</td>
+                                <td>{job.applicationCount}</td>
                                 <td><Link to={`/applications/${job._id}`}>View Applications</Link></td>
                             </tr>)
                         }
