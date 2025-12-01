@@ -18,6 +18,7 @@ import JobApply from './Components/Jobs/JobApply.jsx';
 import Myapplications from './Components/Jobs/Myapplications.jsx';
 import Addjob from './Components/Addjob/Addjob.jsx';
 import MyPostedJobs from './Components/MyPostedJobs/MyPostedJobs.jsx';
+import ViewApplications from './Components/ViewApplications/ViewApplications.jsx';
 
 
 
@@ -33,27 +34,38 @@ const router = createBrowserRouter([
 
       { path: "/login", Component: Login },
       { path: "/register", Component: Register },
-      { path: "/jobs/:id",
-         Component: JobDetails,
-         loader: ({params}) => fetch(`http://localhost:3000/jobs/${params.id}`)
-        },
-        {
-          path: 'jobApply/:id',
-          element: <PrivateRoute><JobApply></JobApply></PrivateRoute>
-        },
-        {
-          path: '/myApplications',
-          element: <PrivateRoute><Myapplications></Myapplications></PrivateRoute>
-        },
+      {
+        path: "/jobs/:id",
+        Component: JobDetails,
+        loader: ({ params }) => fetch(`http://localhost:3000/jobs/${params.id}`)
+      },
+      {
+        path: 'jobApply/:id',
+        element: <PrivateRoute><JobApply></JobApply></PrivateRoute>
+      },
+      {
+        path: '/myApplications',
+        element: <PrivateRoute><Myapplications></Myapplications></PrivateRoute>
+      },
 
-        {
-          path: '/addjob',
-          element: <PrivateRoute><Addjob></Addjob></PrivateRoute>
-        },
-        {
-          path: '/myyPostedJobs',
-          element: <PrivateRoute><MyPostedJobs></MyPostedJobs></PrivateRoute>
-        },
+      {
+        path: '/addjob',
+        element: <PrivateRoute><Addjob></Addjob></PrivateRoute>
+      },
+      {
+        path: '/myyPostedJobs',
+        element: <PrivateRoute><MyPostedJobs></MyPostedJobs></PrivateRoute>
+      },
+      {
+        path: '/applications/:job_id',
+        element: <PrivateRoute><ViewApplications></ViewApplications></PrivateRoute>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/application/job/${params.job_id}`)
+            .then(res => {
+              if (!res.ok) throw new Error('Failed to fetch data');
+              return res.json();
+            }),
+      },
     ],
   },
 ]);
