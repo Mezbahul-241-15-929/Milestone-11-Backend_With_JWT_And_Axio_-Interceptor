@@ -61,10 +61,6 @@ const router = createBrowserRouter([
         element: <PrivateRoute><ViewApplications></ViewApplications></PrivateRoute>,
         loader: ({ params }) =>
           fetch(`http://localhost:3000/application/job/${params.job_id}`)
-            .then(res => {
-              if (!res.ok) throw new Error('Failed to fetch data');
-              return res.json();
-            }),
       },
     ],
   },
