@@ -42,12 +42,14 @@ const AuthProvider = ({ children }) => {
         setLoading(false);
         if(curretnUser?.email){
             const userData ={email: curretnUser.email};
-            axios.post('http://localhost:3000/jwt',userData)
+            axios.post('http://localhost:3000/jwt',userData,{
+                withCredentials: true
+            })
             .then(res=>{
                 console.log('token after jwt',res.data);
-                const token = res.data.token;
-                console.log(token);
-                localStorage.setItem('token',token);
+                // const token = res.data.token;
+                // console.log(token);
+                // localStorage.setItem('token',token);
             })
             .catch(error => console.log(error))
         }
